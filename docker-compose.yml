@@ -59,6 +59,30 @@ services:
     networks:
       - oracle-net
 
+  # ── LiteLLM Proxy (Anthropic → OpenAI-compat gateway) ────────────
+  # Translates OpenAI SDK calls into Anthropic API calls so the agent
+  # can use ANTHROPIC_API_KEY directly without any code changes.
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: oracle-forge-litellm
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    ports:
+      - "4001:4000"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml:ro
+    command: ["--config", "/app/config.yaml", "--port", "4000", "--num_workers", "1"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:4000/health/liveliness || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 20s
+    networks:
+      - oracle-net
+
   # ── Oracle Forge Agent ─────────────────────────────────────────────
   agent:
     build:
@@ -76,6 +100,8 @@ services:
       PG_PASSWORD: ${PG_PASSWORD:-oracleforge}
       PG_DB: ${PG_DB:-postgres}
       MONGO_URI: mongodb://${MONGO_USER:-oracle}:${MONGO_PASSWORD:-oracleforge}@mongodb:27017/
+      # LiteLLM proxy — routes claude-* model names to Anthropic API
+      LITELLM_PROXY_URL: http://litellm:4000
     volumes:
       # Mount DataAgentBench (with datasets) — not baked into image
       - ./DataAgentBench:/app/DataAgentBench
@@ -88,6 +114,8 @@ services:
         condition: service_healthy
       mongodb:
         condition: service_healthy
+      # litellm is optional — only needed when using ANTHROPIC_API_KEY (sk-ant-...)
+      # Remove hard dependency so agent works with gpt-4o / OpenRouter regardless
     networks:
       - oracle-net
     # Default: show help. Override with:

@@ -1,0 +1,102 @@
+diff --git a/common_scaffold/DataAgent.py b/common_scaffold/DataAgent.py
+index 48641953c..bd1de0caf 100644
+--- a/common_scaffold/DataAgent.py
++++ b/common_scaffold/DataAgent.py
+@@ -11,7 +11,12 @@ from openai.types.chat import ChatCompletionMessage, ChatCompletionMessageToolCa
+ from dotenv import load_dotenv
+ from common_scaffold.prompts import prompt_builder
+ from common_scaffold.tools.BaseTool import BaseTool
+-from common_scaffold.tools.ExecTool import ExecTool
++# Use LocalExecTool (subprocess-based) instead of ExecTool (Docker-in-Docker)
++# to avoid autogen_core / autogen_ext dependency and Docker socket complexity.
++try:
++    from common_scaffold.tools.LocalExecTool import LocalExecTool as ExecTool
++except ImportError:
++    from common_scaffold.tools.ExecTool import ExecTool  # type: ignore
+ from common_scaffold.tools.ListDBTool import ListDBTool
+ from common_scaffold.tools.QueryDBTool import QueryDBTool
+ from common_scaffold.tools.ReturnAnswerTool import ReturnAnswerTool
+@@ -73,12 +78,19 @@ class DataAgent:
+         self.logger.info(f"\tmax_iterations: {self.max_iterations}")
+         self.llm_call_count = 0
+         load_dotenv()
+-        if "gpt" in deployment_name.lower():
+-            self.client = AzureOpenAI(
+-                api_key=os.getenv("AZURE_API_KEY"),
+-                api_version=os.getenv("AZURE_API_VERSION"),
+-                azure_endpoint=os.getenv("AZURE_API_BASE")
+-            )
++        if "gpt" in deployment_name.lower() or "o1" in deployment_name.lower() or "o3" in deployment_name.lower():
++            _openai_key = os.getenv("OPENAI_API_KEY")
++            _azure_key = os.getenv("AZURE_API_KEY")
++            if _openai_key and not _azure_key:
++                # Direct OpenAI API (sk-proj-... keys)
++                self.client = OpenAI(api_key=_openai_key)
++            else:
++                # Azure OpenAI fallback
++                self.client = AzureOpenAI(
++                    api_key=_azure_key,
++                    api_version=os.getenv("AZURE_API_VERSION"),
++                    azure_endpoint=os.getenv("AZURE_API_BASE")
++                )
+         elif "gemini" in deployment_name.lower():
+             self.client = OpenAI(
+                 api_key=os.getenv("GEMINI_API_KEY"),
+@@ -90,10 +102,37 @@ class DataAgent:
+                 base_url="https://api.together.xyz/v1",
+             )
+         elif "claude" in deployment_name.lower():
+-            self.client = OpenAI(
+-                api_key=os.getenv("ANTHROPIC_API_KEY"),
+-                base_url="https://api.anthropic.com/v1",
++            # Auto-detect which key/backend to use — priority order:
++            #  1. OpenRouter  — detected by sk-or-v1- prefix in EITHER env var
++            #  2. LiteLLM proxy — used when LITELLM_PROXY_URL set + real sk-ant- key
++            #  3. Direct Anthropic API — fallback (requires real sk-ant- key)
++            _litellm_url = os.getenv("LITELLM_PROXY_URL")
++            _anthropic_key = os.getenv("ANTHROPIC_API_KEY", "")
++            # Accept OpenRouter key from either variable
++            _openrouter_key = (
++                os.getenv("OPENROUTER_API_KEY")
++                or (_anthropic_key if _anthropic_key.startswith("sk-or-v1-") else "")
+             )
++            if _openrouter_key:
++                self.client = OpenAI(
++                    api_key=_openrouter_key,
++                    base_url="https://openrouter.ai/api/v1",
++                    default_headers={
++                        "HTTP-Referer": "https://github.com/gashawbekele06/oracle-forge",
++                        "X-Title": "Oracle Forge",
++                    },
++                )
++            elif _litellm_url and _anthropic_key.startswith("sk-ant-"):
++                # Route through LiteLLM proxy which translates to native Anthropic API
++                self.client = OpenAI(
++                    api_key="litellm-proxy",
++                    base_url=_litellm_url,
++                )
++            else:
++                self.client = OpenAI(
++                    api_key=_anthropic_key,
++                    base_url="https://api.anthropic.com/v1",
++                )
+         else:
+             raise ValueError(f"Unsupported deployment name: {deployment_name}")
+         self.deployment_name = deployment_name
+diff --git a/common_scaffold/tools/db_utils/mongo_utils.py b/common_scaffold/tools/db_utils/mongo_utils.py
+index 4e7e0a6e4..2d1afd838 100644
+--- a/common_scaffold/tools/db_utils/mongo_utils.py
++++ b/common_scaffold/tools/db_utils/mongo_utils.py
+@@ -30,8 +30,11 @@ def load_db(dump_folder: str, db_name: str):
+         #     ["mongorestore", f"--nsInclude={db_name}.*", dump_path],
+         #     check=True
+         # )
++        # Pass --uri so mongorestore connects to the correct Docker MongoDB
++        # (defaults to localhost:27017 which won't work in our container network)
++        mongo_uri = db_config.MONGO_URI
+         result = subprocess.run(
+-            ["mongorestore", f"--nsInclude={db_name}.*", dump_path],
++            ["mongorestore", f"--uri={mongo_uri}", f"--nsInclude={db_name}.*", str(dump_path)],
+             check=True,
+             stdout=subprocess.PIPE,
+             stderr=subprocess.PIPE,

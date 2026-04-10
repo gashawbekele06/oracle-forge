@@ -76,3 +76,23 @@ df['daily_return'] = df.groupby('ticker')['close'].pct_change()
 **What went wrong**: FatalError: MongoDB load error (FileNotFoundError): [Errno 2] No such file or directory: 'mongorestore'
 
 **Correct approach**: [To be filled by team after manual diagnosis]
+
+
+---
+**Dataset**: yelp | **Query**: 3
+
+**Query**: unknown
+
+**What went wrong**: terminate_reason=llm_response_failed (APIStatusError): Error code: 402 - {'error': {'message': 'This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 30038. To increase, visit https://openrouter.ai/settings/keys and create a key with a higher weekly limit', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'org_3B7LqR6KG0MSzOr4fEskO8X8zKr'}, answer=''
+
+**Correct approach**: [To be filled by team after manual diagnosis]
+
+
+---
+**Dataset**: yelp | **Query**: 4
+
+**Query**: unknown
+
+**What went wrong**: terminate_reason=llm_response_failed (APIStatusError): Error code: 402 - {'error': {'message': 'This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 30038. To increase, visit https://openrouter.ai/settings/keys and create a key with a higher weekly limit', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'org_3B7LqR6KG0MSzOr4fEskO8X8zKr'}, answer=''
+
+**Correct approach**: [To be filled by team after manual diagnosis]
