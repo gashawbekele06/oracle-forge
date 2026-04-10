@@ -1,0 +1,326 @@
+[
+  {
+    "dataset": "yelp",
+    "query": "1",
+    "run": "0",
+    "answer": "The average rating of all businesses located in Indianapolis, Indiana is approximately 3.55 (out of 5)."
+  },
+  {
+    "dataset": "yelp",
+    "query": "2",
+    "run": "0",
+    "answer": "Pennsylvania (PA) has the highest number of reviews with 617 reviews, and the average rating of businesses in that state is approximately 3.76."
+  },
+  {
+    "dataset": "yelp",
+    "query": "5",
+    "run": "0",
+    "answer": "I encountered an issue while accessing the necessary data file for businesses with WiFi. Please check the file path or availability of the data."
+  },
+  {
+    "dataset": "yelp",
+    "query": "6",
+    "run": "0",
+    "answer": "The business that received the highest average rating between January 1, 2016, and June 30, 2016, is associated with the business_ref \"businessref_9\" from the review table, with an average rating of 4.0. However, no corresponding category or business information was available in the business collection from the businessinfo_database using the matching prefix of \"business_id\"."
+  },
+  {
+    "dataset": "yelp",
+    "query": "7",
+    "run": "0",
+    "answer": "There are no users who registered on Yelp in 2016. Therefore, no business categories have received reviews from such users since 2016."
+  },
+  {
+    "dataset": "yelp",
+    "query": "3",
+    "run": "0",
+    "answer": "During 2018, no businesses that received reviews offered either business parking or bike parking."
+  },
+  {
+    "dataset": "yelp",
+    "query": "4",
+    "run": "0",
+    "answer": "There are no businesses in the database that are recorded to accept credit card payments."
+  },
+  {
+    "dataset": "agnews",
+    "query": "1",
+    "run": "0",
+    "answer": "I encountered errors while attempting to determine the article with the longest description. Please try again or verify the data's availability and correctness."
+  },
+  {
+    "dataset": "agnews",
+    "query": "2",
+    "run": "0",
+    "answer": "I encountered an error while processing the data to determine the fraction of articles by Amy Jones in the Science/Technology category. Unfortunately, I am unable to resolve it at this time."
+  },
+  {
+    "dataset": "agnews",
+    "query": "3",
+    "run": "0",
+    "answer": "The average number of business articles published per year in Europe from 2010 to 2020 is approximately 9.36."
+  },
+  {
+    "dataset": "agnews",
+    "query": "4",
+    "run": "0",
+    "answer": "In 2015, the region that published the largest number of articles in the World category was North America, with 108 articles."
+  },
+  {
+    "dataset": "bookreview",
+    "query": "1",
+    "run": "0",
+    "answer": "The required data files could not be accessed or found. Please verify the data file paths or regenerate the data from the databases."
+  },
+  {
+    "dataset": "bookreview",
+    "query": "2",
+    "run": "0",
+    "answer": "There are no English-language books in the 'Literature & Fiction' category with a perfect average rating of 5.0 available in the database."
+  },
+  {
+    "dataset": "bookreview",
+    "query": "3",
+    "run": "0",
+    "answer": "I encountered repeated issues in processing the query results. Although I retrieved high-rated books and high average ratings from both databases, there seems to be an issue with joining or extracting the details, likely related to data misalignment between the two datasets. Further investigation into data compatibility or manual data checks may be necessary to resolve this."
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "1",
+    "run": "0",
+    "answer": "The lead cannot be qualified based on the latest discussions because there are no recent voice call transcripts or knowledge articles related to the lead with ID 00QWt0000089AekMAE available. Therefore, it is impossible to determine which, if any, of the BANT factors ('Budget', 'Authority', 'Need', 'Timeline') are not met."
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "2",
+    "run": "0",
+    "answer": "ka0Wt000000EpXNIA0"
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "3",
+    "run": "0",
+    "answer": "Quote"
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "4",
+    "run": "0",
+    "answer": "There is no month in the past 10 months where the number of SecureAnalytics Pro cases significantly exceeds those of other months."
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "5",
+    "run": "0",
+    "answer": "There have been no reported issues for the associated product Id 01tWt000006hV8LIAU over the past five months, based on the available data."
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "6",
+    "run": "0",
+    "answer": "No QuoteLineItem found for the provided Quote Id, hence there is no invalid config to assess against company regulations using the knowledge articles."
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "7",
+    "run": "0",
+    "answer": "None"
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "8",
+    "run": "0",
+    "answer": "005Wt000003NFKpIAO"
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "9",
+    "run": "0",
+    "answer": "I am unable to complete the query due to repeated errors in database function calls for extracting year and quarter. Please check the function implementation or database compatibility."
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "10",
+    "run": "0",
+    "answer": "No agent processed more than one case with available data for handle times in the past four months."
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "11",
+    "run": "0",
+    "answer": "There is no AI processing unit associated with transactions of Contact Id 003Wt00000Jqy8SIAR for the specified period last month (June 2021)."
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "12",
+    "run": "0",
+    "answer": "#005Wt000003NEa3IAG"
+  },
+  {
+    "dataset": "crmarenapro",
+    "query": "13",
+    "run": "0",
+    "answer": "I encountered an issue processing the results to determine the agent with the top sales figures. The necessary data merge and computation did not return the expected format. Please verify the query and data handling processes and try running the analysis again."
+  },
+  {
+    "dataset": "DEPS_DEV_V1",
+    "query": "1",
+    "run": "0",
+    "answer": "No NPM packages with associated GitHub repositories and sufficient project information about stars were found to determine the top 5 most popular based on GitHub star numbers."
+  },
+  {
+    "dataset": "DEPS_DEV_V1",
+    "query": "2",
+    "run": "0",
+    "answer": "The top 5 NPM projects with the MIT license and marked as release, which have the highest GitHub fork counts, are:\n\n1. \"semantic-org/semantic-ui\" with 4955 forks\n2. \"react-native-community/react-native-webview\" with 2962 forks\n\nNote: There seems to be duplication in the result. Please ensure that these are the unique projects with regard to forks."
+  },
+  {
+    "dataset": "GITHUB_REPOS",
+    "query": "1",
+    "run": "0",
+    "answer": "Among repositories that do not use Python, approximately 16.83% of their README.md files include copyright information."
+  },
+  {
+    "dataset": "GITHUB_REPOS",
+    "query": "2",
+    "run": "0",
+    "answer": "No non-binary Swift files were found in the dataset."
+  },
+  {
+    "dataset": "GITHUB_REPOS",
+    "query": "3",
+    "run": "0",
+    "answer": "There are 1077 commit messages found in repositories that use the Shell programming language and are licensed under Apache-2.0, where each message exists, is shorter than 1,000 characters, and does not begin with 'merge', 'update', or 'test'."
+  },
+  {
+    "dataset": "GITHUB_REPOS",
+    "query": "4",
+    "run": "0",
+    "answer": "twbs/bootstrap"
+  },
+  {
+    "dataset": "googlelocal",
+    "query": "1",
+    "run": "0",
+    "answer": "No businesses located in Los Angeles, California were found in the database. The query for businesses in Los Angeles returned an empty result, indicating that there may be no such entries found or the description filter used could have been too specific. Please check the data or try with different criteria."
+  },
+  {
+    "dataset": "googlelocal",
+    "query": "2",
+    "run": "0",
+    "answer": "Here are some massage therapy businesses with an average rating of at least 4.0 and their respective ratings:\n1. **Aurora Massage** - Average Rating: 4.18\n2. **Angel-A Massage** - Average Rating: 4.33\n3. **Elite Massage** - Average Rating: 5.00"
+  },
+  {
+    "dataset": "googlelocal",
+    "query": "3",
+    "run": "0",
+    "answer": "It seems that there are currently no open businesses with their operating hours listed in the database. Therefore, I'm unable to provide a ranking of the top 5 businesses that remain open after 6:00 PM.\n\nPlease ensure there is data in the business_database for open businesses with operating hours, or consider checking the source for any potential issues with data availability."
+  },
+  {
+    "dataset": "googlelocal",
+    "query": "4",
+    "run": "0",
+    "answer": "The three businesses that received the highest number of reviews with ratings of 4.5 or higher during 2019 are:\n\n1. Aurora Massage with 8 high-rating reviews.\n2. The Boochyard @ Local Roots with 7 high-rating reviews.\n3. Widows Peak Salon with 6 high-rating reviews."
+  },
+  {
+    "dataset": "music_brainz_20k",
+    "query": "1",
+    "run": "0",
+    "answer": "The query to find the track details for Beyonc\u00e9's song 'Get Me Bodied' in the \"tracks\" database returned no results. This means that we cannot find any matching track_id for this song to calculate its revenue in the \"sales\" database.\n\nAs a result, the revenue generated by Apple Music from this song in Canada cannot be determined from the provided data."
+  },
+  {
+    "dataset": "music_brainz_20k",
+    "query": "2",
+    "run": "0",
+    "answer": "The store that earned the most revenue in USD from Brucqe Maginnis' song 'Street Hype' across all countries is Amazon Music, with a total revenue of $304.13."
+  },
+  {
+    "dataset": "music_brainz_20k",
+    "query": "3",
+    "run": "0",
+    "answer": "The song that generated the highest total revenue in USD across all stores and countries is \"Systemisch bled\" by St\u00fcng\u00f6, with a total revenue of $2522.82."
+  },
+  {
+    "dataset": "PANCANCER_ATLAS",
+    "query": "1",
+    "run": "0",
+    "answer": "There are no available LGG patients in the clinical database with a valid histology annotation and matching gene expression data to compute the average log10-transformed expression of the IGF2 gene across different histology types."
+  },
+  {
+    "dataset": "PANCANCER_ATLAS",
+    "query": "2",
+    "run": "0",
+    "answer": "No histological types were matched with CDH1 gene mutations among alive BRCA patients in the PanCancer Atlas, as there were no intersecting data points between the molecular mutation data and the clinical patient data."
+  },
+  {
+    "dataset": "PANCANCER_ATLAS",
+    "query": "3",
+    "run": "0",
+    "answer": "I am unable to retrieve the necessary data to calculate the chi-square statistic because the required columns from the clinical_database do not seem to match the expected schema. Please check the column names and try again."
+  },
+  {
+    "dataset": "PATENTS",
+    "query": "1",
+    "run": "0",
+    "answer": ""
+  },
+  {
+    "dataset": "PATENTS",
+    "query": "2",
+    "run": "0",
+    "answer": ""
+  },
+  {
+    "dataset": "PATENTS",
+    "query": "3",
+    "run": "0",
+    "answer": ""
+  },
+  {
+    "dataset": "stockindex",
+    "query": "1",
+    "run": "0",
+    "answer": "The stock index in the Asia region that has exhibited the highest average intraday volatility since 2020 is \"399001.SZ\"  with an average intraday volatility of approximately 0.0202."
+  },
+  {
+    "dataset": "stockindex",
+    "query": "2",
+    "run": "0",
+    "answer": "The indices from North American stock indices that had more up days than down days in 2018 is IXIC (NASDAQ Composite Index)."
+  },
+  {
+    "dataset": "stockindex",
+    "query": "3",
+    "run": "0",
+    "answer": "The 5 indices that would have produced the highest overall returns from regular monthly investments since 2000 are:\n\n1. **IXIC** (NASDAQ) - Total Return: 3401.20, Country: United States\n2. **NYA** (New York Stock Exchange) - Total Return: 1847.03, Country: United States\n3. **N225** (Tokyo Stock Exchange) - Total Return: 1845.23, Country: Japan\n4. **HSI** (Hong Kong Stock Exchange) - Total Return: 1110.51, Country: Hong Kong\n5. **GDAXI** (Deutsche B\u00f6rse) - Total Return: 1038.01, Country: Germany"
+  },
+  {
+    "dataset": "stockmarket",
+    "query": "1",
+    "run": "0",
+    "answer": "The maximum adjusted closing price in 2020 for The RealReal, Inc. was 18.44."
+  },
+  {
+    "dataset": "stockmarket",
+    "query": "2",
+    "run": "0",
+    "answer": "There are no ETF securities listed on NYSE Arca that reached an adjusted closing price above $200 at any point during 2015."
+  },
+  {
+    "dataset": "stockmarket",
+    "query": "3",
+    "run": "0",
+    "answer": "The companies listed on NASDAQ that were financially troubled in 2008, along with their descriptions, are:\n\n1. **Future FinTech Group Inc. (FTFT)**: Specializes in blockchain-based products and financial technology solutions.\n2. **Mid-Con Energy Partners, LP (MCEP)**: Engages in the exploration and production of oil and natural gas.\n3. **Invesco RAFI Strategic Developed ex-US Small Company ETF (ISDS)**: Provides a portfolio of small-cap stocks from developed markets outside the US.\n4. **China Ceramics Co., Ltd. (CCCL)**: Manufactures high-quality ceramic tiles for the residential and commercial markets.\n5. **Reebonz Holding Limited (RBZ)**: Operates as an online luxury marketplace for high-end fashion items.\n6. **Frontier Communications Corporation (FTR)**: Offers telecommunications services including internet and phone solutions in the US.\n7. **Apex Global Brands Inc. (APEX)**: Markets a diverse portfolio of fashion and lifestyle brands.\n8. **Synthesis Energy Systems, Inc. (SES)**: Converts low-cost carbon resources into clean energy and chemical products.\n9. **Farmmi, Inc. (FAMI)**: Distributes high-quality agricultural products.\n10. **CBAK Energy Technology, Inc. (CBAT)**: Develops lithium-ion batteries for electric vehicles and renewable energy.\n11. **Sypris Solutions, Inc. (SYPR)**: Offers engineering and manufacturing services for aerospace and defense.\n12. **VectoIQ Acquisition Corp. (VTIQW)**: Invests in technology and automotive firms.\n13. **Pacific Ethanol, Inc. (PEIX)**: Produces renewable fuels and alcohol products.\n14. **Correvio Pharma Corp. (CORV)**: Develops innovative cardiovascular therapies.\n15. **AGM Group Holdings Inc. (AGMH)**: Provides financial technology solutions.\n16. **CounterPath Corporation (CPAH)**: Enhances communication with VoIP and unified communications applications.\n17. **NXT-ID Inc. (NXTD)**: Develops technology solutions for security and electronic payments.\n18. **Sunesis Pharmaceuticals, Inc. (SNSS)**: Focuses on developing innovative cancer therapies.\n19. **DASAN Zhone Solutions, Inc. (DZSI)**: Provides advanced broadband access solutions.\n20. **Biocept, Inc. (BIOC)**: Offers advanced diagnostic solutions for cancer.\n21. **Ocean Power Technologies, Inc. (OPTT)**: Develops wave energy technology for renewable energy.\n22. **Ideanomics, Inc. (IDEX)**: Innovates within the commercial electric vehicle industry.\n23. **BIO-key International, Inc. (BKYI)**: Specializes in biometric solutions for identity verification.\n24. **Aemetis, Inc. (AMTX)**: Produces advanced renewable fuels and reduces carbon emissions.\n25. **SPI Energy Co., Ltd. (SPI)**: Provides renewable energy solutions, focusing on solar power.\n\nThe average daily trading volume data for these stocks could not be retrieved due to technical constraints. Please contact support for more information on trading volumes in 2008."
+  },
+  {
+    "dataset": "stockmarket",
+    "query": "4",
+    "run": "0",
+    "answer": "Currently, there is a persistent issue with processing the execution which involves determining the number of up days versus down days for a specific stock. The code execution repeatedly fails to produce the expected output format. Unfortunately, I cannot proceed further without resolving this execution issue."
+  },
+  {
+    "dataset": "stockmarket",
+    "query": "5",
+    "run": "0",
+    "answer": "The query did not return any companies with exceed days in 2019."
+  }
+]
