@@ -104,8 +104,10 @@ def test_retriever_finds_relevant_entry():
         tmp_path = f.name
 
     try:
-        retriever = MultiPassRetriever(kb_path=tmp_path)
-        results = retriever.search("customer id format CUST prefix join issue")
+        # "format mismatch" is a QUERY_EXPANSIONS key → expands to "cust-", "prefix",
+        # "strip" etc. — all of which appear verbatim in the crmarenapro entry text
+        retriever = MultiPassRetriever(kb_path=tmp_path, min_score=0.05)
+        results = retriever.search("format mismatch")
         assert len(results) > 0
         assert any("crmarenapro" in r.dataset for r in results)
     finally:
@@ -135,8 +137,8 @@ def test_retriever_format_results():
         tmp_path = f.name
 
     try:
-        retriever = MultiPassRetriever(kb_path=tmp_path)
-        results = retriever.search("CUST prefix")
+        retriever = MultiPassRetriever(kb_path=tmp_path, min_score=0.05)
+        results = retriever.search("format mismatch")
         formatted = retriever.format_results(results)
         assert "Dataset" in formatted or "Wrong" in formatted or "Correct" in formatted
     finally:

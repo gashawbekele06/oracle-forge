@@ -41,7 +41,8 @@ def test_detect_integer_string():
 
 
 def test_detect_yelp_id():
-    s = pd.Series(["iCQpiavjjPzJ5_3gPD5Eq", "Ha3iJu77CxlrFm-vQRs_8g"])
+    # Yelp business/user IDs are exactly 22 alphanumeric chars
+    s = pd.Series(["4JNXUYY8wbaaDmk3BPzlWw", "Ha3iJu77CxlrFm-vQRs_8g"])
     assert detect_format(s) == "yelp_id"
 
 

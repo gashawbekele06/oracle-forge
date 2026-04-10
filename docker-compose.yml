@@ -109,6 +109,8 @@ services:
       - ./kb:/app/kb
       # Mount results dir
       - ./results:/app/results
+      # Mount utils so tests are runnable inside container
+      - ./utils:/app/utils
     depends_on:
       postgres:
         condition: service_healthy
