@@ -42,6 +42,10 @@ ENV KB_ROOT=/app/kb
 ENV PYTHONPATH=/app:/app/DataAgentBench
 ENV PYTHONUNBUFFERED=1
 
+# ── Utils symlink — allows `python -m pytest utils/tests/` from /app/agent ──
+# utils/ is mounted at /app/utils at runtime; symlink makes it visible here too
+RUN ln -sf /app/utils /app/agent/utils
+
 # ── Default command ───────────────────────────────────────────────────────
 WORKDIR /app/agent
 CMD ["python", "run_benchmark.py", "--help"]
