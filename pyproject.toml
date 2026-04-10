@@ -1,0 +1,40 @@
+[project]
+name = "oracle-forge"
+version = "0.1.0"
+description = "Production data analytics agent — TRP1 Week 8-9 Oracle Forge Challenge"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.40.0",
+    "openai>=1.50.0",
+    "litellm>=1.50.0",
+    "psycopg2-binary>=2.9.9",
+    "pymongo>=4.7.0",
+    "duckdb>=0.10.0",
+    "pandas>=2.2.0",
+    "pyarrow>=15.0.0",
+    "numpy>=1.26.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0.1",
+    "httpx>=0.27.0",
+    "tenacity>=8.3.0",
+    "rich>=13.7.0",
+    "tqdm>=4.66.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
