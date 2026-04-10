@@ -1,0 +1,59 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Results (gitignore traces and large result files)
+results/traces/
+results/benchmark_results.json
+results/submission.json
+results/benchmark_run.log
+eval/traces.json
+eval/eval_report.json
+
+# Keep these in git:
+!results/.gitkeep
+!eval/score_log.jsonl
+
+# Docker
+.docker/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+~$*.docx
+~$*.xlsx
+
+# Large database files (handled by Git LFS in DataAgentBench)
+*.db
+*.duckdb
+*.sqlite
+
+# Logs
+*.log
+logs/
+
+# Temp
+tmp/
+temp/

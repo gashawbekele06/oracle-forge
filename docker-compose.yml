@@ -1,0 +1,122 @@
+version: "3.9"
+
+# ============================================================
+# Oracle Forge — Docker Compose
+# ============================================================
+# Services:
+#   postgres  — PostgreSQL 17 for DAB PostgreSQL datasets
+#   mongodb   — MongoDB 8 for DAB MongoDB datasets
+#   sandbox   — Lightweight Python executor (execute_python tool)
+#   agent     — Oracle Forge agent
+#
+# Quick start:
+#   cp .env.example .env      # fill in ANTHROPIC_API_KEY / OPENROUTER_API_KEY
+#   docker compose up -d postgres mongodb
+#   docker compose run agent python run_benchmark.py --dataset yelp --query_id 1
+# ============================================================
+
+services:
+
+  # ── PostgreSQL ─────────────────────────────────────────────────────
+  postgres:
+    image: postgres:17-alpine
+    container_name: oracle-forge-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PG_USER:-postgres}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-oracleforge}
+      POSTGRES_DB: ${PG_DB:-postgres}
+    ports:
+      - "${PG_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Mount DAB SQL dump files for dataset loading
+      - ./DataAgentBench:/dab:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - oracle-net
+
+  # ── MongoDB ────────────────────────────────────────────────────────
+  mongodb:
+    image: mongo:8
+    container_name: oracle-forge-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-oracle}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-oracleforge}
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./DataAgentBench:/dab:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - oracle-net
+
+  # ── Python Sandbox ─────────────────────────────────────────────────
+  # Lightweight container that only has pandas + pyarrow.
+  # Used by the execute_python tool to run data processing code safely.
+  sandbox:
+    build:
+      context: .
+      dockerfile: agent/Dockerfile
+      target: sandbox
+    container_name: oracle-forge-sandbox
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - oracle-net
+
+  # ── Oracle Forge Agent ─────────────────────────────────────────────
+  agent:
+    build:
+      context: .
+      dockerfile: agent/Dockerfile
+    container_name: oracle-forge-agent
+    env_file: .env
+    environment:
+      DAB_ROOT: /app/DataAgentBench
+      KB_ROOT: /app/kb
+      PYTHONPATH: /app:/app/DataAgentBench
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_USER: ${PG_USER:-postgres}
+      PG_PASSWORD: ${PG_PASSWORD:-oracleforge}
+      PG_DB: ${PG_DB:-postgres}
+      MONGO_URI: mongodb://${MONGO_USER:-oracle}:${MONGO_PASSWORD:-oracleforge}@mongodb:27017/
+    volumes:
+      # Mount DataAgentBench (with datasets) — not baked into image
+      - ./DataAgentBench:/app/DataAgentBench
+      # Mount KB so corrections are persisted on host
+      - ./kb:/app/kb
+      # Mount results dir
+      - ./results:/app/results
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - oracle-net
+    # Default: show help. Override with:
+    #   docker compose run agent python run_benchmark.py --dataset yelp --query_id 1
+    command: ["python", "run_benchmark.py", "--help"]
+
+# ── Volumes ────────────────────────────────────────────────────────────────
+volumes:
+  postgres_data:
+  mongo_data:
+
+# ── Networks ───────────────────────────────────────────────────────────────
+networks:
+  oracle-net:
+    driver: bridge
