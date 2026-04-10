@@ -66,3 +66,13 @@ count = df['is_wait_complaint'].sum()
 df = df.sort_values(['ticker', 'date'])
 df['daily_return'] = df.groupby('ticker')['close'].pct_change()
 ```
+
+
+---
+**Dataset**: yelp | **Query**: 1
+
+**Query**: unknown
+
+**What went wrong**: FatalError: MongoDB load error (FileNotFoundError): [Errno 2] No such file or directory: 'mongorestore'
+
+**Correct approach**: [To be filled by team after manual diagnosis]

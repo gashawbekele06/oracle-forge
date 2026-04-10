@@ -1,5 +1,3 @@
-version: "3.9"
-
 # ============================================================
 # Oracle Forge — Docker Compose
 # ============================================================
@@ -58,21 +56,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - oracle-net
-
-  # ── Python Sandbox ─────────────────────────────────────────────────
-  # Lightweight container that only has pandas + pyarrow.
-  # Used by the execute_python tool to run data processing code safely.
-  sandbox:
-    build:
-      context: .
-      dockerfile: agent/Dockerfile
-      target: sandbox
-    container_name: oracle-forge-sandbox
-    restart: unless-stopped
-    environment:
-      - PYTHONUNBUFFERED=1
     networks:
       - oracle-net
 
