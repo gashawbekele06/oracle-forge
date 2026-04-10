@@ -559,45 +559,6 @@
     "run": 0
   },
   {
-    "dataset": "PATENTS",
-    "query_id": "1",
-    "answer": "",
-    "terminate_reason": "",
-    "llm_calls": 0,
-    "retries": 2,
-    "duration_s": 0.2,
-    "success": false,
-    "timestamp": "2026-04-10T13:53:52.845117",
-    "trace_path": "/app/results/traces/PATENTS/q1_20260410_135352.json",
-    "run": 0
-  },
-  {
-    "dataset": "PATENTS",
-    "query_id": "2",
-    "answer": "",
-    "terminate_reason": "",
-    "llm_calls": 0,
-    "retries": 2,
-    "duration_s": 0.23,
-    "success": false,
-    "timestamp": "2026-04-10T13:53:53.237609",
-    "trace_path": "/app/results/traces/PATENTS/q2_20260410_135352.json",
-    "run": 0
-  },
-  {
-    "dataset": "PATENTS",
-    "query_id": "3",
-    "answer": "",
-    "terminate_reason": "",
-    "llm_calls": 0,
-    "retries": 2,
-    "duration_s": 0.22,
-    "success": false,
-    "timestamp": "2026-04-10T13:53:53.603893",
-    "trace_path": "/app/results/traces/PATENTS/q3_20260410_135353.json",
-    "run": 0
-  },
-  {
     "dataset": "stockindex",
     "query_id": "1",
     "answer": "The stock index in the Asia region that has exhibited the highest average intraday volatility since 2020 is \"399001.SZ\"  with an average intraday volatility of approximately 0.0202.",
@@ -699,6 +660,45 @@
     "success": true,
     "timestamp": "2026-04-10T14:34:55.919070",
     "trace_path": "/app/results/traces/stockmarket/q5_20260410_141901.json",
+    "run": 0
+  },
+  {
+    "dataset": "PATENTS",
+    "query_id": "1",
+    "answer": "I encountered an issue while processing the data to identify the CPC technology areas. It seems that there's a mismatch or error in extracting CPC codes from the patent records. Please review the data format or extraction logic for anomalies.",
+    "terminate_reason": "return_answer",
+    "llm_calls": 5,
+    "retries": 0,
+    "duration_s": 861.55,
+    "success": true,
+    "timestamp": "2026-04-10T18:10:52.123101",
+    "trace_path": "/app/results/traces/PATENTS/q1_20260410_175630.json",
+    "run": 0
+  },
+  {
+    "dataset": "PATENTS",
+    "query_id": "2",
+    "answer": "The query to find the CPC technology areas in Germany with the highest exponential moving average of patent filings each year for patents granted in the second half of 2019 resulted in no data. This could be due to an issue with the filtering criteria or missing data for the specified parameters.",
+    "terminate_reason": "return_answer",
+    "llm_calls": 3,
+    "retries": 0,
+    "duration_s": 543.71,
+    "success": true,
+    "timestamp": "2026-04-10T18:19:56.026058",
+    "trace_path": "/app/results/traces/PATENTS/q2_20260410_181052.json",
+    "run": 0
+  },
+  {
+    "dataset": "PATENTS",
+    "query_id": "3",
+    "answer": "The assignees who have cited patents assigned to UNIV CALIFORNIA, excluding UNIV CALIFORNIA itself, and the titles of the primary CPC subclasses associated with these citations are:\n\n1. Assignee: [Name of Citing Assignee]\n   - CPC Symbol: Y02B30/00\n   - Full Title: Energy efficient heating, ventilation or air conditioning [HVAC]\n\n2. Assignee: [Name of Citing Assignee]\n   - CPC Symbol: F25B2321/001\n   - Full Title: Details of machines, plants or systems, using electric or magnetic effects by using electro-caloric effects\n\n3. Assignee: [Name of Citing Assignee]\n   - CPC Symbol: F25B21/00\n   - Full Title: Machines, plants or systems, using electric or magnetic effects\n\n4. Assignee: [Name of Citing Assignee]\n   - CPC Symbol: F28D15/00\n   - Full Title: Heat-exchange apparatus with the intermediate heat-transfer medium in closed tubes passing into or through the conduit walls; Heat-exchange apparatus employing intermediate heat-transfer medium or bodies\n\n5. Assignee: [Name of Citing Assignee]\n   - CPC Symbol: C09J11/04\n   - Full Title: Non-macromolecular additives inorganic\n\n6. Assignee: [Name of Citing Assignee]\n   - CPC Symbol: C08K3/08\n   - Full Title: Metals\n\n7. Assignee: [Name of Citing Assignee]\n   - CPC Symbol: C08K2201/001\n   - Full Title: Conductive additives\n\nNote: [Name of Citing Assignee] needs to be identified from the original citation data, which was not retrieved due to storage format issues.",
+    "terminate_reason": "return_answer",
+    "llm_calls": 13,
+    "retries": 0,
+    "duration_s": 760.47,
+    "success": true,
+    "timestamp": "2026-04-10T18:32:36.627029",
+    "trace_path": "/app/results/traces/PATENTS/q3_20260410_181956.json",
     "run": 0
   }
 ]
