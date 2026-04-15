@@ -553,18 +553,19 @@ docker compose run --rm agent python run_benchmark.py \
 
 ## Live Agent
 
-The agent is deployed on the team's shared tenai-infra server:
+**Repository**: [https://github.com/gashawbekele06/oracle-forge](https://github.com/gashawbekele06/oracle-forge)
 
-> **Server access**: Connect via Tailscale mesh — contact Drivers for onboarding.
->
-> **Live URL**: `[ADD TENAI-INFRA URL — e.g. http://10.x.x.x:8000 or tunnel URL]`
->
-> To run a query on the shared server:
-> ```bash
-> # Via tmux session on the shared server
-> docker compose run --rm agent python run_benchmark.py \
->   --dataset yelp --query_id 1 --llm gpt-4o
-> ```
+The agent runs locally via Docker Compose (no external server required). A facilitator can reproduce the full benchmark from a clean clone in under 30 minutes:
+
+```bash
+git clone https://github.com/gashawbekele06/oracle-forge.git
+cd oracle-forge
+cp .env.example .env          # add OPENAI_API_KEY
+docker compose up -d postgres mongodb
+docker compose run --rm agent python run_benchmark.py --dataset yelp --query_id 1 --llm gpt-4o
+```
+
+> See [Step-by-Step Setup](#step-by-step-setup) below for full instructions including DataAgentBench dataset loading.
 
 ---
 
