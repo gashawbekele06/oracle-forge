@@ -1,0 +1,137 @@
+# Oracle Forge — MCP Tools Configuration
+# Pattern: Google MCP Toolbox (https://github.com/googleapis/genai-toolbox)
+#
+# This file declares the database sources and MCP tools exposed by the
+# Oracle Forge MCP server (mcp/server.py).
+#
+# All four DataAgentBench database types are covered:
+#   PostgreSQL · MongoDB · SQLite · DuckDB
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Sources (database connections) ───────────────────────────────────────────
+sources:
+
+  postgres:
+    kind: postgres
+    host: ${PG_HOST:-localhost}
+    port: ${PG_PORT:-5432}
+    database: ${PG_DB:-postgres}
+    user: ${PG_USER:-postgres}
+    password: ${PG_PASSWORD:-oracleforge}
+    datasets:
+      - yelp           # business, review, user tables
+      - crmarenapro    # customers, orders, tickets tables
+      - googlelocal    # places, reviews tables
+
+  mongodb:
+    kind: mongodb
+    uri: ${MONGO_URI:-mongodb://oracle:oracleforge@localhost:27017/}
+    datasets:
+      - yelp           # reviews collection (unstructured text)
+      - agnews         # news articles collection
+      - bookreview     # book reviews collection
+
+  sqlite:
+    kind: sqlite
+    db_path: ${DAB_ROOT}/query_{dataset}/{db_name}.db
+    datasets:
+      - stockindex     # index_price, company tables
+      - stockmarket    # trades, securities tables
+      - music_brainz_20k  # artist, recording, release tables
+
+  duckdb:
+    kind: duckdb
+    db_path: ${DAB_ROOT}/query_{dataset}/{db_name}.duckdb
+    datasets:
+      - DEPS_DEV_V1      # dependency graph tables
+      - GITHUB_REPOS     # repositories, commits tables
+      - PANCANCER_ATLAS  # clinical, mutation, expression tables
+      - PATENTS          # patent_publication, citation tables
+
+
+# ── Tools (MCP tool definitions) ─────────────────────────────────────────────
+tools:
+
+  oracle_ask:
+    description: >
+      Natural language analytics question → full Oracle Forge agent pipeline
+      (schema injection, LLM planning, multi-DB queries, self-correction) → answer.
+      Supports all 54 DataAgentBench queries across 12 datasets.
+    inputs:
+      question:
+        type: string
+        description: Natural language question (e.g. "Which state has the most 5-star restaurants?")
+      dataset:
+        type: string
+        description: DAB dataset name. Use oracle_datasets to list available options.
+      llm:
+        type: string
+        default: gpt-4o
+        description: "LLM model. Options: gpt-4o, claude-opus-4-6, claude-sonnet-4-6"
+    databases: [postgres, mongodb, sqlite, duckdb]
+    latency: 20s–300s   # LLM call required
+
+  oracle_query_db:
+    description: >
+      Execute a raw SQL SELECT or MongoDB aggregation query directly against
+      a named database within a dataset. Fast — no LLM call.
+    inputs:
+      dataset:
+        type: string
+        description: DAB dataset name (e.g. "yelp", "crmarenapro", "PATENTS")
+      db_name:
+        type: string
+        description: Logical DB name from db_config.yaml (e.g. "yelp_db", "yelp_mongo")
+      query:
+        type: string
+        description: |
+          SQL SELECT statement for PostgreSQL / SQLite / DuckDB.
+          JSON object for MongoDB: {"collection": "reviews", "filter": {"stars": 5}, "limit": 100}
+    databases: [postgres, mongodb, sqlite, duckdb]
+    latency: <2s
+
+  oracle_list_db:
+    description: >
+      List all tables (SQL) or collections (MongoDB) in a dataset database,
+      with row / document counts.
+    inputs:
+      dataset:
+        type: string
+      db_name:
+        type: string
+    databases: [postgres, mongodb, sqlite, duckdb]
+    latency: <5s
+
+  oracle_datasets:
+    description: >
+      List all available DataAgentBench datasets with their database names
+      and types. Use this first to discover what is available.
+    inputs: {}
+    databases: [postgres, mongodb, sqlite, duckdb]
+    latency: <1s
+
+  oracle_schema:
+    description: >
+      Return the full database schema description for a dataset —
+      table structures, column types, and join key guidance.
+      Equivalent to the db_description_withhint.txt that the agent uses.
+    inputs:
+      dataset:
+        type: string
+    databases: [postgres, mongodb, sqlite, duckdb]
+    latency: <1s
+
+
+# ── Server ────────────────────────────────────────────────────────────────────
+server:
+  implementation: mcp/server.py
+  framework: FastMCP        # mcp[cli] >= 1.0.0
+  transports:
+    - kind: stdio
+      description: Claude Desktop and local MCP clients (default)
+      launch: python mcp/server.py --transport stdio
+    - kind: sse
+      port: 8000
+      description: Docker / HTTP MCP clients
+      launch: docker compose up -d oracle-mcp
+  health_check: http://localhost:8000/health   # SSE transport only
