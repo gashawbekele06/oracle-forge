@@ -1,0 +1,36 @@
+{
+  "_comment": [
+    "Oracle Forge — Claude Desktop MCP configuration",
+    "",
+    "HOW TO USE:",
+    "  1. Open Claude Desktop → Settings → Developer → Edit Config",
+    "  2. Merge the 'mcpServers' block below into your claude_desktop_config.json",
+    "  3. Adjust the 'cwd' path to your oracle-forge checkout",
+    "  4. Restart Claude Desktop",
+    "",
+    "REQUIREMENTS (on host machine, not Docker):",
+    "  pip install mcp[cli] psycopg2-binary pymongo duckdb pyyaml pandas python-dotenv",
+    "  (or run the MCP server via Docker — see docker-compose.yml oracle-mcp service)"
+  ],
+  "mcpServers": {
+    "oracle-forge": {
+      "command": "python",
+      "args": [
+        "mcp/server.py",
+        "--transport",
+        "stdio"
+      ],
+      "cwd": "C:/Users/gasha/OneDrive/Desktop/TRP1/Week 8&9/oracle-forge",
+      "env": {
+        "DAB_ROOT": "C:/Users/gasha/OneDrive/Desktop/TRP1/Week 8&9/oracle-forge/DataAgentBench",
+        "KB_ROOT": "C:/Users/gasha/OneDrive/Desktop/TRP1/Week 8&9/oracle-forge/kb",
+        "OPENAI_API_KEY": "<your-openai-api-key>",
+        "PG_HOST": "localhost",
+        "PG_PORT": "5432",
+        "PG_USER": "postgres",
+        "PG_PASSWORD": "oracleforge",
+        "MONGO_URI": "mongodb://oracle:oracleforge@localhost:27017/"
+      }
+    }
+  }
+}

@@ -124,6 +124,46 @@ services:
     #   docker compose run agent python run_benchmark.py --dataset yelp --query_id 1
     command: ["python", "run_benchmark.py", "--help"]
 
+  # ── Oracle Forge MCP Server ────────────────────────────────────────────────
+  # Exposes Oracle Forge tools via Model Context Protocol (SSE transport)
+  # Compatible with Claude Desktop, Cursor, and any MCP client.
+  #
+  # Usage:
+  #   docker compose up -d oracle-mcp
+  #   # Then add to Claude Desktop config:
+  #   #   "url": "http://localhost:8000/sse"
+  oracle-mcp:
+    build:
+      context: .
+      dockerfile: mcp/Dockerfile
+    container_name: oracle-forge-mcp
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DAB_ROOT: /app/DataAgentBench
+      KB_ROOT: /app/kb
+      PYTHONPATH: /app:/app/DataAgentBench:/app/agent
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_USER: ${PG_USER:-postgres}
+      PG_PASSWORD: ${PG_PASSWORD:-oracleforge}
+      PG_DB: ${PG_DB:-postgres}
+      MONGO_URI: mongodb://${MONGO_USER:-oracle}:${MONGO_PASSWORD:-oracleforge}@mongodb:27017/
+    ports:
+      - "${MCP_PORT:-8000}:8000"
+    volumes:
+      - ./DataAgentBench:/app/DataAgentBench:ro
+      - ./kb:/app/kb
+      - ./results:/app/results
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - oracle-net
+    command: ["python", "mcp/server.py", "--transport", "sse", "--port", "8000"]
+
 # ── Volumes ────────────────────────────────────────────────────────────────
 volumes:
   postgres_data:
