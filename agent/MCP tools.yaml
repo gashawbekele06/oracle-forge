@@ -1,8 +1,8 @@
 # Oracle Forge — MCP Tools Configuration
 # Pattern: Google MCP Toolbox (https://github.com/googleapis/genai-toolbox)
 #
-# This file declares the database sources and MCP tools exposed by the
-# Oracle Forge MCP server (mcp/server.py).
+# This file declares the database sources and MCP tools available to the
+# Oracle Forge agent. Tools are invoked through the DataAgent orchestrator.
 #
 # All four DataAgentBench database types are covered:
 #   PostgreSQL · MongoDB · SQLite · DuckDB
@@ -123,15 +123,11 @@ tools:
 
 
 # ── Server ────────────────────────────────────────────────────────────────────
+# Tools are loaded at agent startup via agent/context_manager.py.
+# No separate MCP server process is required for benchmark runs.
+# To run the agent against the full DAB benchmark:
+#   docker compose run --rm agent python run_benchmark.py --all --llm gpt-4o
 server:
-  implementation: mcp/server.py
-  framework: FastMCP        # mcp[cli] >= 1.0.0
-  transports:
-    - kind: stdio
-      description: Claude Desktop and local MCP clients (default)
-      launch: python mcp/server.py --transport stdio
-    - kind: sse
-      port: 8000
-      description: Docker / HTTP MCP clients
-      launch: docker compose up -d oracle-mcp
-  health_check: http://localhost:8000/health   # SSE transport only
+  kind: toolbox
+  launch: docker compose run --rm agent python oracle_agent.py
+  transport: stdio
