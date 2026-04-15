@@ -700,5 +700,44 @@
     "timestamp": "2026-04-10T18:32:36.627029",
     "trace_path": "/app/results/traces/PATENTS/q3_20260410_181956.json",
     "run": 0
+  },
+  {
+    "dataset": "agnews",
+    "query_id": "1",
+    "answer": "The title of the sports article with the greatest number of characters in its description is \"Sports Log\".",
+    "terminate_reason": "return_answer",
+    "llm_calls": 4,
+    "retries": 0,
+    "duration_s": 73.9,
+    "success": true,
+    "timestamp": "2026-04-15T14:55:56.267622",
+    "trace_path": "/app/results/traces/agnews/q1_20260415_145442.json",
+    "run": 1
+  },
+  {
+    "dataset": "agnews",
+    "query_id": "1",
+    "answer": "There was an error with the execution. Please try again later.",
+    "terminate_reason": "return_answer",
+    "llm_calls": 12,
+    "retries": 1,
+    "duration_s": 742.87,
+    "success": true,
+    "timestamp": "2026-04-15T15:08:19.245972",
+    "trace_path": "/app/results/traces/agnews/q1_20260415_145556.json",
+    "run": 2
+  },
+  {
+    "dataset": "agnews",
+    "query_id": "1",
+    "answer": "There is no sports article available in the database based on the current filters and schema information provided.",
+    "terminate_reason": "return_answer",
+    "llm_calls": 6,
+    "retries": 0,
+    "duration_s": 166.27,
+    "success": true,
+    "timestamp": "2026-04-15T15:11:05.700753",
+    "trace_path": "/app/results/traces/agnews/q1_20260415_150819.json",
+    "run": 3
   }
 ]
