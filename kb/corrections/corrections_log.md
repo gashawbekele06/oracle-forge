@@ -96,3 +96,33 @@ df['daily_return'] = df.groupby('ticker')['close'].pct_change()
 **What went wrong**: terminate_reason=llm_response_failed (APIStatusError): Error code: 402 - {'error': {'message': 'This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 30038. To increase, visit https://openrouter.ai/settings/keys and create a key with a higher weekly limit', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'org_3B7LqR6KG0MSzOr4fEskO8X8zKr'}, answer=''
 
 **Correct approach**: [To be filled by team after manual diagnosis]
+
+
+---
+**Dataset**: PATENTS | **Query**: 1
+
+**Query**: unknown
+
+**What went wrong**: AssertionError: db_path does not exist: /app/DataAgentBench/query_PATENTS/query_dataset/patent_publication.db
+
+**Correct approach**: The PATENTS dataset requires `patent_publication.db` (5.42 GB), which is not bundled with DataAgentBench and must be downloaded separately from Google Drive. Run `bash DataAgentBench/query_PATENTS/download.sh` inside the container (or use `gdown` with `--continue` and a retry loop for large files). Verify with `stat patent_publication.db` — must be > 5.42 GB before re-running. Once present, all three PATENTS queries pass.
+
+
+---
+**Dataset**: PATENTS | **Query**: 2
+
+**Query**: unknown
+
+**What went wrong**: AssertionError: db_path does not exist: /app/DataAgentBench/query_PATENTS/query_dataset/patent_publication.db
+
+**Correct approach**: Same as PATENTS Query 1 — download patent_publication.db (5.42 GB) via download.sh. All three PATENTS queries share the same database file; downloading once fixes all three.
+
+
+---
+**Dataset**: PATENTS | **Query**: 3
+
+**Query**: unknown
+
+**What went wrong**: AssertionError: db_path does not exist: /app/DataAgentBench/query_PATENTS/query_dataset/patent_publication.db
+
+**Correct approach**: Same as PATENTS Query 1 — download patent_publication.db (5.42 GB) via download.sh. All three PATENTS queries share the same database file; downloading once fixes all three.
