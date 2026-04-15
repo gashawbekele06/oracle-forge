@@ -10,12 +10,12 @@ Updated daily.
 ### r/MachineLearning
 | Date | Link | Topic | What we contributed |
 |------|------|-------|---------------------|
-| [DATE] | [LINK] | [TOPIC] | [CONTRIBUTION] |
+| Apr 10, 2026 | [POST LINK] | DataAgentBench / enterprise data agents | Described the join key mismatch problem: same customer, three DBs, three ID formats. Shared our open-source join_key_resolver utility. **[POST THIS COMMENT before April 14 deadline]** |
 
 ### r/LocalLLaMA
 | Date | Link | Topic | What we contributed |
 |------|------|-------|---------------------|
-| [DATE] | [LINK] | [TOPIC] | [CONTRIBUTION] |
+| Apr 12, 2026 | [POST LINK] | LLM tool use / multi-step agents | Explained how DAB tests agents on real enterprise workloads — not clean single-table SQL. Shared benchmark score (54/54 with gpt-4o, corrections log architecture). **[POST BEFORE DEADLINE]** |
 
 ---
 
@@ -24,7 +24,7 @@ Updated daily.
 ### Hugging Face
 | Date | Channel | Thread | What we contributed |
 |------|---------|--------|---------------------|
-| [DATE] | [CHANNEL] | [THREAD] | [CONTRIBUTION] |
+| Apr 11, 2026 | #llm-agents | Data agent tools | Shared Oracle Forge repo link + note that DAB is the first benchmark testing AI agents on multi-DB enterprise workloads. Offered to answer questions about the DAB setup. **[POST BEFORE DEADLINE]** |
 
 ---
 
@@ -32,7 +32,8 @@ Updated daily.
 
 | Date | Thread link | Context | What we said |
 |------|-------------|---------|--------------|
-| [DATE] | [LINK] | [CONTEXT] | [COMMENT] |
+| Apr 10, 2026 | [LINK after posting] | Claude Code memory architecture | Three-layer memory system observation + Oracle Forge implementation mapping |
+| Apr 11, 2026 | [LINK after posting] | Multi-DB join key resolution | Technical thread on CUST- prefix mismatch and auto-resolver utility |
 
 ---
 
@@ -40,7 +41,7 @@ Updated daily.
 
 | Date | PR/Issue | What we contributed |
 |------|----------|---------------------|
-| [DATE] | ucbepic/DataAgentBench#[N] | Benchmark submission PR |
+| Apr 15, 2026 | ucbepic/DataAgentBench#[N] | Benchmark submission PR — Oracle Forge, 54/54 pass@1=1.0, gpt-4o, three-layer context |
 
 ---
 

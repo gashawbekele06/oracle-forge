@@ -545,9 +545,26 @@ docker compose run --rm agent python run_benchmark.py \
 
 | Role | Members | Primary deliverables |
 |---|---|---|
-| Drivers | 2 members | Running agent, evaluation harness, benchmark submission |
-| Intelligence Officers | 2 members | Knowledge Base, utility library, adversarial probes |
-| Signal Corps | 2 members | External engagement, articles, community log |
+| **Drivers** | Gemechis, Eyor | Running agent, evaluation harness, benchmark submission |
+| **Intelligence Officers** | Gashaw Bekele, Mikias | Knowledge Base, utility library, adversarial probes |
+| **Signal Corps** | Meseret, Kirubel | External engagement, articles, community log |
+
+---
+
+## Live Agent
+
+The agent is deployed on the team's shared tenai-infra server:
+
+> **Server access**: Connect via Tailscale mesh — contact Drivers for onboarding.
+>
+> **Live URL**: `[ADD TENAI-INFRA URL — e.g. http://10.x.x.x:8000 or tunnel URL]`
+>
+> To run a query on the shared server:
+> ```bash
+> # Via tmux session on the shared server
+> docker compose run --rm agent python run_benchmark.py \
+>   --dataset yelp --query_id 1 --llm gpt-4o
+> ```
 
 ---
 
