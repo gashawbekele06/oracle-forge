@@ -2403,5 +2403,18 @@
     "timestamp": "2026-04-15T19:24:48.198545",
     "trace_path": "/app/results/traces/music_brainz_20k/q3_20260415_192316.json",
     "run": 3
+  },
+  {
+    "dataset": "music_brainz_20k",
+    "query_id": "3",
+    "answer": "The song with the highest total revenue in USD is \"Systemisch bled\" by St\u00fcng\u00f6 from the album \"Um wos gehts'n?\", released in 2009.",
+    "terminate_reason": "return_answer",
+    "llm_calls": 9,
+    "retries": 0,
+    "duration_s": 289.12,
+    "success": true,
+    "timestamp": "2026-04-15T19:29:37.524096",
+    "trace_path": "/app/results/traces/music_brainz_20k/q3_20260415_192448.json",
+    "run": 4
   }
 ]
